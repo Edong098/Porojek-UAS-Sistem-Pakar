@@ -1,0 +1,51 @@
+﻿ID;Data Teks;Pola Makan;Riwayat Penyakit;Lingkungan;Risiko Stunting
+1;Balita 2 tahun jarang protein dan sering diare;Kurang;Sering Diare;Tidak Bersih;Tinggi
+2;Balita 18 bulan asupan protein kurang;Kurang;Jarang;Cukup Bersih;Sedang
+3;Balita 3 tahun makan bergizi;Baik;Tidak Ada;Bersih;Rendah
+4;Balita 24 bulan sering sakit;Kurang;Sering Infeksi;Tidak Bersih;Tinggi
+5;Balita 30 bulan pola makan seimbang;Baik;Tidak Ada;Bersih;Rendah
+6;Balita 20 bulan tinggi badan rendah;Kurang;Sering Diare;Tidak Bersih;Tinggi
+7;Balita 28 bulan imunisasi lengkap;Baik;Jarang;Bersih;Rendah
+8;Balita 22 bulan sering menolak makan;Kurang;Jarang;Cukup Bersih;Sedang
+9;Balita 25 bulan infeksi berulang;Kurang;Sering Infeksi;Tidak Bersih;Tinggi
+10;Balita 26 bulan asupan cukup;Cukup;Jarang;Bersih;Sedang
+11;Balita 19 bulan kondisi kesehatan bervariasi;Kurang;Sering Diare;Cukup Bersih;Sedang
+12;Balita 32 bulan kondisi kesehatan bervariasi;Baik;Jarang;Bersih;Rendah
+13;Balita 32 bulan kondisi kesehatan bervariasi;Cukup;Sering Infeksi;Cukup Bersih;Sedang
+14;Balita 35 bulan kondisi kesehatan bervariasi;Kurang;Sering Diare;Bersih;Sedang
+15;Balita 30 bulan kondisi kesehatan bervariasi;Cukup;Sering Infeksi;Tidak Bersih;Sedang
+16;Balita 29 bulan kondisi kesehatan bervariasi;Cukup;Sering Infeksi;Cukup Bersih;Rendah
+17;Balita 24 bulan kondisi kesehatan bervariasi;Kurang;Tidak Ada;Cukup Bersih;Sedang
+18;Balita 33 bulan kondisi kesehatan bervariasi;Cukup;Sering Infeksi;Cukup Bersih;Rendah
+19;Balita 33 bulan kondisi kesehatan bervariasi;Kurang;Tidak Ada;Bersih;Sedang
+20;Balita 20 bulan kondisi kesehatan bervariasi;Baik;Sering Infeksi;Bersih;Rendah
+21;Balita 22 bulan kondisi kesehatan bervariasi;Cukup;Sering Diare;Bersih;Sedang
+22;Balita 36 bulan kondisi kesehatan bervariasi;Kurang;Jarang;Cukup Bersih;Sedang
+23;Balita 33 bulan kondisi kesehatan bervariasi;Baik;Tidak Ada;Bersih;Rendah
+24;Balita 28 bulan kondisi kesehatan bervariasi;Cukup;Tidak Ada;Tidak Bersih;Sedang
+25;Balita 19 bulan kondisi kesehatan bervariasi;Baik;Jarang;Cukup Bersih;Tinggi
+26;Balita 32 bulan kondisi kesehatan bervariasi;Cukup;Sering Diare;Tidak Bersih;Sedang
+27;Balita 27 bulan kondisi kesehatan bervariasi;Cukup;Tidak Ada;Cukup Bersih;Sedang
+28;Balita 31 bulan kondisi kesehatan bervariasi;Baik;Sering Diare;Tidak Bersih;Tinggi
+29;Balita 33 bulan kondisi kesehatan bervariasi;Cukup;Sering Infeksi;Bersih;Sedang
+30;Balita 36 bulan kondisi kesehatan bervariasi;Cukup;Jarang;Bersih;Sedang
+31;Balita 25 bulan kondisi kesehatan bervariasi;Baik;Tidak Ada;Tidak Bersih;Rendah
+32;Balita 35 bulan kondisi kesehatan bervariasi;Kurang;Sering Infeksi;Bersih;Sedang
+33;Balita 34 bulan kondisi kesehatan bervariasi;Cukup;Sering Diare;Bersih;Sedang
+34;Balita 36 bulan kondisi kesehatan bervariasi;Cukup;Jarang;Tidak Bersih;Sedang
+35;Balita 21 bulan kondisi kesehatan bervariasi;Cukup;Tidak Ada;Cukup Bersih;Sedang
+36;Balita 20 bulan kondisi kesehatan bervariasi;Baik;Tidak Ada;Cukup Bersih;Rendah
+37;Balita 20 bulan kondisi kesehatan bervariasi;Cukup;Jarang;Tidak Bersih;Sedang
+38;Balita 25 bulan kondisi kesehatan bervariasi;Cukup;Jarang;Cukup Bersih;Tinggi
+39;Balita 32 bulan kondisi kesehatan bervariasi;Baik;Tidak Ada;Cukup Bersih;Tinggi
+40;Balita 21 bulan kondisi kesehatan bervariasi;Baik;Jarang;Bersih;Rendah
+41;Balita 28 bulan kondisi kesehatan bervariasi;Kurang;Sering Diare;Bersih;Sedang
+42;Balita 25 bulan kondisi kesehatan bervariasi;Baik;Sering Diare;Bersih;Rendah
+43;Balita 27 bulan kondisi kesehatan bervariasi;Baik;Tidak Ada;Bersih;Rendah
+44;Balita 25 bulan kondisi kesehatan bervariasi;Baik;Sering Diare;Bersih;Rendah
+45;Balita 29 bulan kondisi kesehatan bervariasi;Baik;Tidak Ada;Bersih;Rendah
+46;Balita 30 bulan kondisi kesehatan bervariasi;Baik;Sering Infeksi;Cukup Bersih;Tinggi
+47;Balita 33 bulan kondisi kesehatan bervariasi;Cukup;Jarang;Tidak Bersih;Sedang
+48;Balita 27 bulan kondisi kesehatan bervariasi;Baik;Tidak Ada;Cukup Bersih;Rendah
+49;Balita 24 bulan kondisi kesehatan bervariasi;Cukup;Sering Diare;Tidak Bersih;Sedang
+50;Balita 25 bulan kondisi kesehatan bervariasi;Baik;Tidak Ada;Cukup Bersih;Sedang
