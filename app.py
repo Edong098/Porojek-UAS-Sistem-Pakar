@@ -3,7 +3,6 @@ import pandas as pd  # type: ignore
 from fpdf import FPDF  # type: ignore
 import plotly.express as px  # type: ignore
 import tempfile  # type: ignore
-from streamlit_option_menu import option_menu  # type: ignore
 from model_stunting import BayesianNetworkStunting
 
 # LOAD CSS FILE
