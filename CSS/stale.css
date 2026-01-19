@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+/* GLOBAL */
+.stApp {
+    background: #020617;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* HEADER*/
+header[data-testid="stHeader"] {
+    background: #020617 !important;
+    border-bottom: 1px solid #1e293b;
+}
+
+/* SIDEBAR */
+section[data-testid="stSidebar"] {
+    background-color: #0f172a !important;
+    border-right: 2px solid #1e40af;
+}
+
+section[data-testid="stSidebar"] div[role="radio"]:hover {
+    background: rgba(59, 130, 246, 0.15) !important;
+}
+
+section[data-testid="stSidebar"] div[aria-checked="true"] {
+    background: linear-gradient(135deg, #1e40af, #2563eb) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+section[data-testid="stSidebar"] input[type="radio"] {
+    display: none;
+}
+
+/* TEXT*/
+.main h1,
+.main h2,
+.main h3,
+.main h4 {
+    color: #ffffff !important;
+    font-weight: 700;
+    opacity: 1 !important;
+}
+
+/* Paragraf & deskripsi */
+.main div[data-testid="stMarkdownContainer"] p,
+.main div[data-testid="stMarkdownContainer"] span {
+    color: #e5e7eb !important;
+    opacity: 1 !important;
+    font-weight: 500;
+}
+
+/* List */
+.main div[data-testid="stMarkdownContainer"] li {
+    color: #f9fafb !important;
+    opacity: 1 !important;
+}
+
+/* Label form */
+.main label {
+    color: #ffffff !important;
+    font-weight: 600;
+    opacity: 1 !important;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] * {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.subtitle {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    font-weight: 500;
+}
+
+
+/* DROPDOWN / SELECT TEXT */
+div[data-baseweb="select"] span,
+div[data-baseweb="option"] span {
+    color: #000000 !important;
+    font-weight: 500;
+}
+
+/* HOVER DROPDOWN */
+div[data-baseweb="option"]:hover span {
+    color: #f7f3f3 !important;
+}
+
+/* DIVIDER */
+.custom-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #3b82f6, transparent);
+    margin: 14px 0;
+}
+
+/* CARD / GLASS */
+.header-card {
+    background: linear-gradient(135deg, #1e40af, #1e3a8a);
+    padding: 2.5rem;
+    border-radius: 26px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.glass {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 22px;
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 1.8rem;
+}
+
+/* HASIL DIAGNOSA BESAR */
+.glass h1 {
+    font-size: 64px !important;
+    font-weight: 800 !important;
+    letter-spacing: 2px;
+}
+
+/* CONFIDENCE SCORE */
+.confidence-box {
+    margin-top: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+.penjelasan {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+
+/* BUTTON */
+div.stButton > button,
+div[data-testid="stDownloadButton"] > button {
+    background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border-radius: 16px !important;
+    padding: 1rem 1.5rem !important;
+    border: none !important;
+    width: 100% !important;
+    transition: all 0.25s ease-in-out;
+}
+
+div.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(34,197,94,0.35);
+}
+
+/* Container */
+div[data-baseweb="select"] {
+    background-color: #ffffff !important;
+    border-radius: 14px !important;
+}
+
+/* Value terpilih */
+div[data-baseweb="select"] span {
+    color: #f7f7fa !important;
+    font-weight: 600 !important;
+}
+
+/* Input text */
+input {
+    color: #020617 !important;
+    font-weight: 600 !important;
+}
+
+/* Dropdown list */
+div[data-baseweb="option"] {
+    background-color: #ffffff !important;
+}
+
+/* Dropdown text */
+div[data-baseweb="option"] span {
+    color: #020617 !important;
+    font-weight: 500 !important;
+}
+
+/* Hover dropdown */
+div[data-baseweb="option"]:hover {
+    background-color: #e5e7eb !important;
+}
+
+/* NUMBER INPUT */
+input[type="number"] {
+    color: #020617 !important;
+    font-weight: 600 !important;
+}
+
+/* INFO / ERROR */
+div[data-testid="stAlert"] {
+    border-radius: 14px;
+}
+
+/* FIX HOVER DOWNLOAD BUTTON */
+div[data-testid="stDownloadButton"] > button:hover {
+    background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+    color: #ffffff !important;
+    filter: none !important;
+    box-shadow: 0 12px 30px rgba(34,197,94,0.35) !important;
+    transform: translateY(-2px);
+}
+
+/* FIX TEXT BUTTON HOVER */
+div.stButton > button span,
+div[data-testid="stDownloadButton"] > button span {
+    color: #ffffff !important;
+}
+
+/* SAAT HOVER */
+div.stButton > button:hover span,
+div[data-testid="stDownloadButton"] > button:hover span {
+    color: #ffffff !important;
+}
+
+div[data-testid="stDownloadButton"] * {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
