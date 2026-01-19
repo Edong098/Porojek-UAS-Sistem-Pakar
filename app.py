@@ -6,12 +6,10 @@ import tempfile  # type: ignore
 from streamlit_option_menu import option_menu  # type: ignore
 from model_stunting import BayesianNetworkStunting
 
-
 # LOAD CSS FILE
 def load_css(path):
     with open(path, "r") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
 load_css("CSS/stale.css")
 
 # KONFIGURASI HALAMAN
