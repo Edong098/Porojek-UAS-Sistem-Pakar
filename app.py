@@ -271,6 +271,7 @@ if st.session_state.page == "Beranda":
     </div>
     """, unsafe_allow_html=True)
 
+
     st.info("Sistem ini bersifat **pendukung keputusan**, bukan diagnosis medis.")
 
     if st.button("Mulai Diagnosa Sekarang"):
