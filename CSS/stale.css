@@ -87,12 +87,12 @@ div[data-baseweb="option"] span {
 
 input[type="text"],
 input[type="number"] {
-    color: #ffffff !important;
+    color: #4d4d4d !important;
 }
 
 /* INPUT TEXT & NUMBER */
 div[data-testid="stNumberInput"] input {
-    color: #ffffff !important;
+    color: #4d4d4d !important;
 }
 
 
