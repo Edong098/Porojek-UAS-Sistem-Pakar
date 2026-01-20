@@ -95,6 +95,9 @@ div[data-testid="stNumberInput"] input {
     color: #4d4d4d !important;
 }
 
+input[type="spinner"] {
+    color: #0a0a0a !important;
+}
 
 /* HOVER DROPDOWN */
 div[data-baseweb="option"]:hover span {

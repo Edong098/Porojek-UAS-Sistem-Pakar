@@ -263,7 +263,7 @@ if st.session_state.page == "Beranda":
 
     <h4>Parameter yang Digunakan</h4>
     <ul>
-        <li><b>Umur Balita</b>: rentang usia pertumbuhan kritis (0 - 36 bulan).</li>
+        <li><b>Umur Balita</b>: rentang usia pertumbuhan kritis (18 - 36 bulan).</li>
         <li><b>Pola Makan</b>: kualitas asupan gizi harian.</li>
         <li><b>Riwayat Infeksi</b>: frekuensi penyakit yang pernah dialami.</li>
         <li><b>Sanitasi Lingkungan</b>: kondisi kebersihan dan sumber air.</li>
@@ -310,6 +310,7 @@ elif st.session_state.page == "Diagnosa":
             st.error("Nama balita wajib diisi.")
         else:
             with st.spinner("Sedang menganalisis data..."):
+                
                 model = BayesianNetworkStunting()
                 hasil, _ = model.inferensi(umur, pola, sakit, sanitasi)
 
