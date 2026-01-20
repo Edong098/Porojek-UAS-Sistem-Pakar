@@ -48,76 +48,120 @@ def get_saran(risiko):
             "Tetap berikan stimulasi dan perhatian terhadap tumbuh kembang balita."
         ]
 
+def interpretasi_model(hasil, risiko):
+    confidence_percent = round(hasil[risiko], 2)
 
+    # Urutkan probabilitas
+    sorted_risk = sorted(hasil.items(), key=lambda x: x[1], reverse=True)
+    second_risk, second_val = sorted_risk[1]
+    gap = (hasil[risiko] - second_val) * 100
 
-# FUNGSI PDF
-def generate_pdf(nama, umur, hasil, risiko, grafik_path):
+    if gap >= 20:
+        tingkat = "sangat kuat"
+    elif gap >= 10:
+        tingkat = "cukup kuat"
+    else:
+        tingkat = "perlu perhatian karena selisih antar risiko relatif kecil"
+
+    return (
+        f"Model Bayesian Network menunjukkan bahwa risiko stunting berada pada kategori "
+        f"{risiko} dengan tingkat keyakinan {confidence_percent:.2f}%. "
+        f"Hasil ini {tingkat} dibandingkan kategori risiko lainnya "
+        f"berdasarkan distribusi probabilitas pada grafik."
+    )
+
+# FUNGSI PDF 
+def generate_pdf(nama, umur, hasil, risiko):
     pdf = FPDF()
     pdf.add_page()
-    
-    # Header Warna Biru Tua
-    pdf.set_fill_color(30, 64, 175) 
+
+    # HEADER
+    pdf.set_fill_color(30, 64, 175)
     pdf.rect(0, 0, 210, 40, 'F')
-    
+
     pdf.set_text_color(255, 255, 255)
     pdf.set_font("Arial", "B", 16)
     pdf.cell(0, 20, "LAPORAN HASIL ANALISIS CARESTUNT", ln=True, align="C")
     pdf.ln(10)
-    
-    # Kembali ke teks hitam
+
+    # IDENTITAS
     pdf.set_text_color(0, 0, 0)
     pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, f"IDENTITAS BALITA", ln=True)
-    
-    # Tabel Identitas Sederhana
+    pdf.cell(0, 10, "IDENTITAS BALITA", ln=True)
+
     pdf.set_font("Arial", "", 11)
     pdf.cell(40, 8, "Nama Balita", border=1)
     pdf.cell(0, 8, f" : {nama}", border=1, ln=True)
+
     pdf.cell(40, 8, "Umur", border=1)
     pdf.cell(0, 8, f" : {umur} Bulan", border=1, ln=True)
-    
-    # Hasil Risiko dengan Background Warna
+
+    # HASIL RISIKO
     pdf.ln(5)
     pdf.set_font("Arial", "B", 12)
-    pdf.cell(40, 10, "HASIL RISIKO:", 0)
-    
-    if risiko == "Tinggi": pdf.set_text_color(239, 68, 68)
-    elif risiko == "Sedang": pdf.set_text_color(217, 119, 6)
-    else: pdf.set_text_color(22, 163, 74)
-    
+    pdf.cell(0, 10, "HASIL ANALISIS RISIKO", ln=True)
+
+    if risiko == "Tinggi":
+        pdf.set_text_color(239, 68, 68)
+    elif risiko == "Sedang":
+        pdf.set_text_color(217, 119, 6)
+    else:
+        pdf.set_text_color(22, 163, 74)
+
     pdf.set_font("Arial", "B", 14)
     pdf.cell(0, 10, risiko.upper(), ln=True)
-    pdf.set_text_color(0, 0, 0) 
-    
-    # Garis Pembatas
+    pdf.set_text_color(0, 0, 0)
+
     pdf.line(10, pdf.get_y(), 200, pdf.get_y())
     pdf.ln(5)
 
-    # Grafik
+    # DETAIL PROBABILITAS
     pdf.set_font("Arial", "B", 11)
-    pdf.cell(0, 8, "Visualisasi Probabilitas:", ln=True)
-    pdf.image(grafik_path, x=15, w=180) 
-    pdf.ln(5)
+    pdf.cell(0, 8, "Distribusi Probabilitas Risiko:", ln=True)
 
-    # Detail Persentase
-    pdf.set_font("Arial", "B", 11)
-    pdf.cell(0, 8, "Detail Angka:", ln=True)
     pdf.set_font("Arial", "", 10)
     for k, v in hasil.items():
         pdf.cell(0, 6, f"- {k}: {v:.2f}%", ln=True)
 
-    # Saran
-    pdf.ln(10)
+    # INTERPRETASI MODEL
+    pdf.ln(6)
+    pdf.set_font("Arial", "B", 11)
+    pdf.cell(0, 8, "Interpretasi Model Bayesian Network:", ln=True)
+
+    confidence = hasil[risiko]
+    sorted_risk = sorted(hasil.items(), key=lambda x: x[1], reverse=True)
+    second_risk, second_val = sorted_risk[1]
+    gap = (confidence - second_val)
+
+    if gap >= 0.20:
+        kekuatan = "sangat kuat"
+    elif gap >= 0.10:
+        kekuatan = "cukup kuat"
+    else:
+        kekuatan = "relatif lemah dan perlu perhatian karena selisih probabilitas kecil"
+
+    interpretasi = (
+        f"Berdasarkan hasil inferensi menggunakan metode Bayesian Network, "
+        f"balita teridentifikasi memiliki risiko stunting pada kategori {risiko} "
+        f"dengan tingkat keyakinan sistem sebesar {confidence:.2f}%. "
+        f"Tingkat keyakinan ini dinilai {kekuatan} apabila dibandingkan dengan "
+        f"kategori risiko stunting lainnya berdasarkan perbedaan nilai probabilitas."
+    )
+
+    pdf.set_font("Arial", "", 10)
+    pdf.multi_cell(0, 7, interpretasi)
+
+    # REKOMENDASI
+    pdf.ln(6)
     pdf.set_fill_color(240, 240, 240)
     pdf.set_font("Arial", "B", 11)
-    pdf.cell(0, 8, " REKOMENDASI TINDAKAN:", ln=True, fill=True)
+    pdf.cell(0, 8, "REKOMENDASI TINDAKAN", ln=True, fill=True)
+
     pdf.set_font("Arial", "", 10)
-    saran_list = get_saran(risiko)
-    for s in saran_list:
-        pdf.multi_cell(0, 7, f"* {s}")
+    for s in get_saran(risiko):
+        pdf.multi_cell(0, 7, f"- {s}")
 
     return pdf.output(dest="S").encode("latin-1")
-
 
 # NAVIGATION STATE
 if "page" not in st.session_state:
@@ -201,7 +245,7 @@ elif st.session_state.page == "Diagnosa":
     # JUDUL HALAMAN
     st.markdown("# Analisis Risiko Stunting")
     st.markdown(
-        "<p style='opacity:0.3;'>Masukkan data balita untuk melihat probabilitas risiko stunting.</p>",
+        "<p style='opacity:0.8;'>Masukkan data balita untuk melihat probabilitas risiko stunting.</p>",
         unsafe_allow_html=True
     )
 
@@ -268,6 +312,82 @@ elif st.session_state.page == "Diagnosa":
 
             st.plotly_chart(fig, use_container_width=True)
 
+            # CONFIDENCE CIRCLE
+            confidence_value = confidence_percent
+            circle_color = res_color
+            st.markdown(f"""
+            <div style="
+                margin:30px auto;
+                padding:30px;
+                border-radius:18px;
+                background: radial-gradient(circle at top, #020617, #020617);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+                text-align:center;
+                max-width:420px;
+            ">
+                <p style="margin:0; font-size:14px; opacity:0.7; color:white;">
+                    Tingkat Keyakinan Sistem
+                </p>
+                <div style="
+                    position: relative;
+                    width:160px;
+                    height:160px;
+                    margin:20px auto;
+                    border-radius:50%;
+                    background: conic-gradient(
+                        {circle_color} {confidence_value}%,
+                        rgba(255,255,255,0.12) 0%
+                    );
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                ">
+                    <div style="
+                        width:120px;
+                        height:120px;
+                        background:#020617;
+                        border-radius:50%;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        flex-direction:column;
+                    ">
+                        <span style="
+                            font-size:32px;
+                            font-weight:800;
+                            color:{circle_color};
+                        ">
+                            {confidence_value:.2f}%
+                        </span>
+                        <span style="font-size:12px; opacity:0.6; color:white;">
+                            Confidence
+                        </span>
+                    </div>
+                </div>
+                <p style="margin:0; font-size:13px; opacity:0.6; color:white;">
+                    Berdasarkan inferensi Bayesian Network
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+
+            # INTERPRETASI OTOMATIS
+            interpretasi = interpretasi_model(hasil, risiko)
+
+            st.markdown(f"""
+            <div style="
+                margin-top:18px;
+                padding:20px;
+                border-radius:14px;
+                background: rgba(15,23,42,0.85);
+                border-left: 5px solid {res_color};
+            ">
+                <h4 style="margin-top:0; color:white;">Kesimpulan Analisis Model</h4>
+                <p style="margin-bottom:0; font-size:15px; line-height:1.6; color:white;">
+                    {interpretasi}
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+
             # HASIL RISIKO
             st.markdown("## Rekomendasi Tindakan")
             for i, s in enumerate(get_saran(risiko), start=1):
@@ -307,12 +427,7 @@ elif st.session_state.page == "Diagnosa":
 
 
             # PDF
-            tmpfile = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
-            fig.write_image(tmpfile.name)
-
-            pdf_bytes = generate_pdf(
-                nama, umur, hasil, risiko, tmpfile.name
-            )
+            pdf_bytes = generate_pdf(nama, umur, hasil, risiko)
 
             st.download_button(
                 "📄 Unduh Laporan PDF",

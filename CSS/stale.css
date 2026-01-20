@@ -84,6 +84,18 @@ div[data-baseweb="option"] span {
     font-weight: 500;
 }
 
+
+input[type="text"],
+input[type="number"] {
+    color: #ffffff !important;
+}
+
+/* INPUT TEXT & NUMBER */
+div[data-testid="stNumberInput"] input {
+    color: #ffffff !important;
+}
+
+
 /* HOVER DROPDOWN */
 div[data-baseweb="option"]:hover span {
     color: #f7f3f3 !important;
