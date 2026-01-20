@@ -1,7 +1,7 @@
 import streamlit as st  # type: ignore
 import pandas as pd  # type: ignore
 from fpdf import FPDF  # type: ignore
-import plotly.express as px  # type: ignore
+import matplotlib.pyplot as plt # type: ignore
 import tempfile  # type: ignore
 from model_stunting import BayesianNetworkStunting
 
@@ -70,6 +70,37 @@ def interpretasi_model(hasil, risiko):
         f"berdasarkan distribusi probabilitas pada grafik."
     )
 
+# FUNGSI GRAFIK PROBABILITAS
+def generate_prob_chart(hasil):
+    labels = list(hasil.keys())
+    values = list(hasil.values())
+
+    fig, ax = plt.subplots(figsize=(6, 4))
+    bars = ax.bar(labels, values, color=["#22c55e", "#facc15", "#ef4444"])
+
+    ax.set_ylim(0, 100)
+    ax.set_ylabel("Persentase (%)")
+    ax.set_title("Distribusi Probabilitas Risiko Stunting")
+
+    for bar in bars:
+        height = bar.get_height()
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            height + 1,
+            f"{height:.2f}%",
+            ha="center",
+            fontsize=9
+        )
+
+    plt.tight_layout()
+
+    tmpfile = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+    plt.savefig(tmpfile.name, dpi=150)
+    plt.close()
+
+    return tmpfile.name
+
+
 # FUNGSI PDF 
 def generate_pdf(nama, umur, hasil, risiko):
     pdf = FPDF()
@@ -115,9 +146,16 @@ def generate_pdf(nama, umur, hasil, risiko):
     pdf.line(10, pdf.get_y(), 200, pdf.get_y())
     pdf.ln(5)
 
+    # GRAFIK (MATPLOTLIB)
+    chart_path = generate_prob_chart(hasil)
+    pdf.set_font("Arial", "B", 11)
+    pdf.cell(0, 8, "Visualisasi Distribusi Probabilitas:", ln=True)
+    pdf.image(chart_path, x=20, w=170)
+    pdf.ln(5)
+
     # DETAIL PROBABILITAS
     pdf.set_font("Arial", "B", 11)
-    pdf.cell(0, 8, "Distribusi Probabilitas Risiko:", ln=True)
+    pdf.cell(0, 8, "Detail Nilai Probabilitas:", ln=True)
 
     pdf.set_font("Arial", "", 10)
     for k, v in hasil.items():
@@ -131,21 +169,21 @@ def generate_pdf(nama, umur, hasil, risiko):
     confidence = hasil[risiko]
     sorted_risk = sorted(hasil.items(), key=lambda x: x[1], reverse=True)
     second_risk, second_val = sorted_risk[1]
-    gap = (confidence - second_val)
+    gap = confidence - second_val
 
-    if gap >= 0.20:
+    if gap >= 20:
         kekuatan = "sangat kuat"
-    elif gap >= 0.10:
+    elif gap >= 10:
         kekuatan = "cukup kuat"
     else:
-        kekuatan = "relatif lemah dan perlu perhatian karena selisih probabilitas kecil"
+        kekuatan = "relatif lemah dan perlu perhatian"
 
     interpretasi = (
         f"Berdasarkan hasil inferensi menggunakan metode Bayesian Network, "
-        f"balita teridentifikasi memiliki risiko stunting pada kategori {risiko} "
-        f"dengan tingkat keyakinan sistem sebesar {confidence:.2f}%. "
-        f"Tingkat keyakinan ini dinilai {kekuatan} apabila dibandingkan dengan "
-        f"kategori risiko stunting lainnya berdasarkan perbedaan nilai probabilitas."
+        f"balita berada pada kategori risiko stunting {risiko} "
+        f"dengan tingkat keyakinan sebesar {confidence:.2f}%. "
+        f"Hasil ini dinilai {kekuatan} dibandingkan kategori risiko lainnya "
+        f"berdasarkan selisih nilai probabilitas."
     )
 
     pdf.set_font("Arial", "", 10)
@@ -289,28 +327,36 @@ elif st.session_state.page == "Diagnosa":
             res_color = color_map[risiko]
 
             # GRAFIK PROBABILITAS
-            df = pd.DataFrame(hasil.items(), columns=["Risiko", "Persentase"])
+            labels = list(hasil.keys())
+            values = list(hasil.values())
 
-            fig = px.bar(
-                df,
-                x="Risiko",
-                y="Persentase",
-                text=df["Persentase"].apply(lambda x: f"{x:.1f}%"),
-                color="Risiko",
-                color_discrete_map=color_map
-            )
+            colors = [color_map[l] for l in labels]
 
-            fig.update_traces(textposition="outside")
-            fig.update_layout(
-                yaxis=dict(range=[0, 110]),
-                paper_bgcolor="rgba(0,0,0,0)",
-                plot_bgcolor="rgba(0,0,0,0)",
-                font=dict(color="white"),
-                height=380,
-                showlegend=False
-            )
+            fig, ax = plt.subplots(figsize=(12, 8))
+            bars = ax.bar(labels, values, color=colors)
 
-            st.plotly_chart(fig, use_container_width=True)
+            ax.set_ylim(0, 100)
+            ax.set_ylabel("Persentase (%)")
+            ax.set_title("Distribusi Probabilitas Risiko Stunting")
+
+            # Tampilkan nilai persen di atas bar
+            for bar, val in zip(bars, values):
+                ax.text(
+                    bar.get_x() + bar.get_width() / 2,
+                    val + 1,
+                    f"{val:.1f}%",
+                    ha="center",
+                    va="bottom",
+                    fontsize=10,
+                    fontweight="bold"
+                )
+
+            # Styling agar rapi
+            ax.spines["top"].set_visible(False)
+            ax.spines["right"].set_visible(False)
+            ax.grid(axis="y", alpha=0.3)
+
+            st.pyplot(fig)
 
             # CONFIDENCE CIRCLE
             confidence_value = confidence_percent
@@ -433,9 +479,9 @@ elif st.session_state.page == "Diagnosa":
                 "📄 Unduh Laporan PDF",
                 data=pdf_bytes,
                 file_name=f"Laporan_CareStunt_{nama}.pdf",
-                mime="application/pdf",
-                use_container_width=True
+                mime="application/pdf"
             )
+
 
 # HALAMAN EDUKASI
 elif st.session_state.page == "Edukasi":
