@@ -87,16 +87,16 @@ div[data-baseweb="option"] span {
 
 input[type="text"],
 input[type="number"] {
-    color: #4d4d4d !important;
+    color: #a09d9d !important;
 }
 
 /* INPUT TEXT & NUMBER */
 div[data-testid="stNumberInput"] input {
-    color: #4d4d4d !important;
+    color: #918f8f !important;
 }
 
 input[type="spinner"] {
-    color: #0a0a0a !important;
+    color: #868585 !important;
 }
 
 /* HOVER DROPDOWN */
